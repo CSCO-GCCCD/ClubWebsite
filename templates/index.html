@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-blue-600 text-white p-4 text-center">
+        <h1 class="text-3xl font-bold">Welcome to the GitHub Project Showcase</h1>
+    </header>
+
+    <div class="container mx-auto p-6 text-center">
+        <p class="text-lg mb-4">Click the button below to view all GitHub projects of Team XYZ:</p>
+        <!-- Button to navigate to the GitHub Projects Showcase Page -->
+        <a href="{{ url_for('github') }}">
+            <button class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200">
+                View GitHub Projects
+            </button>
+        </a>
+    </div>
+
+</body>
+</html>

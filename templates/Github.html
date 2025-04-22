@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-blue-600 text-white p-4 text-center">
+        <h1 class="text-3xl font-bold">GitHub Projects Showcase</h1>
+        <p class="text-lg">Projects of Computer Science and Cyber Security Club</p>
+    </header>
+
+    <div class="container mx-auto p-6">
+        <!-- Project Rundown Section -->
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-semibold mb-2">Project Rundown</h2>
+            <p class="text-gray-700">
+                This is a brief rundown of the project. Here you can add details such as:
+                <ul class="list-disc pl-5">
+                    <li>The purpose of the project</li>
+                    <li>Technologies used</li>
+                    <li>Features implemented</li>
+                    <li>Challenges faced and how they were overcome</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- GitHub Repositories Section -->
+        <section id="projects-section" class="space-y-6">
+            <!-- Dynamic content will be loaded here -->
+            <p id="loading-message" class="text-gray-500">Loading projects...</p>
+        </section>
+    </div>
+
+    <script>
+        // GitHub API URL for your team
+        const githubUsername = 'CSCO-GCCCD';
+        const githubAPI = `https://api.github.com/orgs/${githubUsername}/repos`;
+
+        // Function to fetch GitHub repos and display them
+        async function fetchRepos() {
+            try {
+                const response = await axios.get(githubAPI);
+                console.log('GitHub Repos:', response.data); // Debugging: Log the response data
+
+                const repos = response.data;
+
+                // Check if repos are returned
+                if (repos.length === 0) {
+                    document.getElementById('loading-message').innerText = 'No repositories found.';
+                    return;
+                }
+
+                const projectsSection = document.getElementById('projects-section');
+                projectsSection.innerHTML = '';  // Clear the loading message once data is fetched
+
+                repos.forEach(async (repo) => {
+                    // Debugging: Log each repo data to make sure it's correct
+                    console.log('Processing Repo:', repo);
+
+                    // Create a card for each repo
+                    const projectCard = document.createElement('div');
+                    projectCard.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow-md', 'grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-4');
+
+                    // Add repo name and description
+                    projectCard.innerHTML = `
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">
+                                <a href="${repo.html_url}" target="_blank" class="text-blue-600 hover:underline">
+                                    ${repo.name}
+                                </a>
+                            </h3>
+                            <p class="text-gray-600 mb-4">${repo.description || 'No description available'}</p>
+                        </div>
+                        <div class="bg-gray-800 text-white p-3 rounded-md">
+                            <pre>
+                                <code>${await getCodeSnippet(repo)}</code>
+                            </pre>
+                        </div>
+                        <a href="${repo.html_url}" target="_blank" class="block text-center mt-4 t ext-blue-500 hover:underline">View on GitHub</a>
+                    `;
+
+                    // Append the card to the projects section
+                    projectsSection.appendChild(projectCard);
+                });
+            } catch (error) {
+                console.error('Error fetching GitHub repos:', error);
+                document.getElementById('loading-message').innerText = 'Error loading repositories.';
+            }
+        }
+
+        // Function to fetch code snippet from the repository
+        async function getCodeSnippet(repo) {
+            try {
+                const contentResponse = await axios.get(`https://api.github.com/repos/${repo.full_name}/contents`);
+                console.log('Repo contents:', contentResponse.data); // Debugging: Log repo contents
+                // Get the first file in the repository
+                const firstFile = contentResponse.data.find(file => file.type === 'file');
+                if (firstFile) {
+                    const fileContentResponse = await axios.get(firstFile.download_url);
+                    return fileContentResponse.data.substring(0, 200);  // Show first 200 characters of the file
+                }
+                return 'No code available';
+            } catch (error) {
+                console.error('Error fetching code snippet:', error);
+                return 'Error loading code snippet';
+            }
+        }
+
+        // Load repositories on page load
+        window.onload = fetchRepos;
+    </script>
+
+</body>
+</html>
