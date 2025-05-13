@@ -1,26 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
+    <title>CS & Cyber Club</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+    </style>
 </head>
-<body class="bg-gray-100">
 
-    <header class="bg-blue-600 text-white p-4 text-center">
-        <h1 class="text-3xl font-bold">Welcome to the GitHub Project Showcase</h1>
-    </header>
-
-    <div class="container mx-auto p-6 text-center">
-        <p class="text-lg mb-4">Click the button below to view all GitHub projects of Team XYZ:</p>
-        <!-- Button to navigate to the GitHub Projects Showcase Page -->
-        <a href="{{ url_for('github') }}">
-            <button class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200">
-                View GitHub Projects
-            </button>
+<body class="bg-[#2E4A61] font-sans">
+<!-- Header -->
+<header class="bg-[#2E4A61] text-white py-4 px-6 flex justify-between items-center">
+    <div class="text-2xl font-bold">♥</div>
+    <nav class="space-x-6 text-sm">
+        <a href="#" class="hover:underline">Home</a>
+        <a href="#" class="hover:underline">About</a>
+        <a href="#" class="hover:underline">Executives</a>
+        <a href="#" class="hover:underline">Events</a>
+        <a href="Github.html" class="hover:underline">Projects</a>
+    </nav>
+    <div class="flex space-x-2 ml-4">
+        <a class=p1 href="https://discord.gg/KCD6eVyq">
+            <img src="https://img.icons8.com/ios-glyphs/20/ffffff/discord-logo.png" alt="Discord">
         </a>
-    </div>
+        <a class=p1 href="https://www.instagram.com/gc_csclub/">
+            <img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png" alt="Instagram">
+        </a>
+        <a class=p1 href="https://github.com/CSCO-GCCCD" >
+            <img src="https://img.icons8.com/ios-glyphs/20/ffffff/github.png" alt="GitHub">
+        </a>
 
+
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="relative bg-[#2E4A61] text-center py-12">
+    <div class="absolute inset-0 text-[8rem] text-[#3A5973] font-extrabold uppercase tracking-wider select-none opacity-30">
+        <div class="absolute w-full h-full flex justify-center items-center">CS & CYBER</div>
+    </div>
+    <h1 class="relative text-5xl font-bold text-[#F0E3D0] font-[Orbitron]">CS & CYBER</h1>
+</section>
+
+<!-- Navbar under hero -->
+<div class="bg-[#F0E3D0]">
+    <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex justify-between text-xs font-medium text-[#2E4A61]">
+            <span>Grossmont College</span>
+            <span>Computer Science + Cybersecurity Club</span>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Tabs -->
+<div class="bg-[#F0E3D0] border-b border-[#2E4A61]">
+    <div class="flex justify-center space-x-4 text-[#2E4A61] py-2 text-sm">
+        <button class="hover:underline">Home</button>
+        <button class="hover:underline">About</button>
+        <button class="hover:underline">Executives</button>
+        <button class="hover:underline">Events</button>
+        <a href="Github.html" class="hover:underline">Projects</a>
+    </div>
+</div>
+
+<!-- About Section -->
+<section class="bg-[#F0E3D0] py-12 px-6">
+    <div class="max-w-4xl mx-auto text-[#2E4A61]">
+        <h2 class="text-3xl font-bold mb-6 font-[Orbitron] tracking-widest">ABOUT US</h2>
+        <div class="flex flex-col items-center text-center">
+            <p class="max-w-xl text-sm mb-6">
+                The mission of the Computer Science and Cyber Security organization
+                is to bring together students interested in computer science and
+                cybersecurity topics and provide opportunities for professional growth.
+            </p>
+            <div class="w-40 h-40 rounded-full border-4 border-[#2E4A61] flex items-center justify-center">
+                <img src="cutecat.jpg">
+            </div>
+        </div>
+    </div>
+</section>
 </body>
+
 </html>
